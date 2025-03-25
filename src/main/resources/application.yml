@@ -1,0 +1,47 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/skins_db
+    username: skins_user
+    password: skins_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    show-sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: seuemail@gmail.com
+    password: suasenha
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+jwt:
+  secret: minha-chave-secreta-super-segura
+  expiration: 3600000
+
+logging:
+  level:
+    org.springframework: INFO
+    org.hibernate.SQL: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+info:
+  db-status: "OK"
+  app-status: "OK"

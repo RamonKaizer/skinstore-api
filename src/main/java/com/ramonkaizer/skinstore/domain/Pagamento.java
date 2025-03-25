@@ -1,0 +1,35 @@
+package com.ramonkaizer.skinstore.domain;
+
+
+import com.ramonkaizer.skinstore.enums.MetodoPagamento;
+import com.ramonkaizer.skinstore.enums.StatusPagamento;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Pagamento {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
+    private Pedido pedido;
+
+    @Enumerated(EnumType.STRING)
+    private MetodoPagamento metodoPagamento;
+
+    @Enumerated(EnumType.STRING)
+    private StatusPagamento status;
+
+    private LocalDateTime dataPagamento;
+}
