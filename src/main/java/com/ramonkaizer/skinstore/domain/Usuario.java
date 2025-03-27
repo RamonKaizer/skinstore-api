@@ -1,11 +1,8 @@
 package com.ramonkaizer.skinstore.domain;
 
-import com.ramonkaizer.skinstore.enums.TipoUsuario;
+import com.ramonkaizer.skinstore.enums.UserRole;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +11,8 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,33 +27,53 @@ public class Usuario implements UserDetails {
     @Column(length = 100)
     private String email;
 
-    @Column(length = 250)
-    private String senha;
+    private String password;
 
-    @Enumerated(EnumType.STRING)
-    private TipoUsuario tipo;
+    @Enumerated(value = EnumType.STRING)
+    private UserRole role;
 
-    @OneToOne(mappedBy = "usuario")
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Carrinho carrinho;
+
+    public Usuario(String login, String password, UserRole role){
+        this.email = login;
+        this.password = password;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.tipo == TipoUsuario.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
         else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
-    public String getPassword() {
-        return "";
+    public String getUsername() {
+        return this.email;
     }
 
     @Override
-    public String getUsername() {
-        return "";
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return UserDetails.super.isEnabled();
     }
 
     @PrePersist
     void prePersist() {
-        this.setTipo(TipoUsuario.CLIENTE);
+        this.setRole(UserRole.USER);
     }
 }

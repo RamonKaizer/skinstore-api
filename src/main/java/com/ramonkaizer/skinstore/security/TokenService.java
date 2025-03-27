@@ -17,7 +17,7 @@ public class TokenService {
 
     private final String secret;
 
-    public TokenService(@Value("${jwt.secret") String secret) {
+    public TokenService(@Value("${jwt.secret}") String secret) {
         this.secret = secret;
     }
 

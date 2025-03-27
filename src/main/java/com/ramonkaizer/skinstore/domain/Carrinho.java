@@ -13,16 +13,15 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Carrinho {
+public class Carrinho extends ObjectDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "usuario_id", unique = true)
     private Usuario usuario;
 
     @OneToMany(mappedBy = "carrinho")
     private List<CarrinhoSkin> carrinhoSkins;
-
 }

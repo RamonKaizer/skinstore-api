@@ -1,0 +1,46 @@
+package com.ramonkaizer.skinstore.service;
+
+import com.ramonkaizer.skinstore.domain.Carrinho;
+import com.ramonkaizer.skinstore.domain.Usuario;
+import com.ramonkaizer.skinstore.dto.request.UserCreateRequest;
+import com.ramonkaizer.skinstore.dto.request.UserLoginRequest;
+import com.ramonkaizer.skinstore.repository.UsuarioRepository;
+import com.ramonkaizer.skinstore.security.TokenService;
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@AllArgsConstructor
+public class UsuarioService {
+
+    private final UsuarioRepository repository;
+    private final AuthenticationManager authenticationManager;
+    private final TokenService tokenService;
+    private final ModelMapper modelMapper;
+
+    @Transactional
+    public void saveUser(UserCreateRequest request) {
+        Usuario user = modelMapper.map(request, Usuario.class);
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
+        user.setPassword(encryptedPassword);
+        Carrinho carrinho = Carrinho.builder()
+                .usuario(user)
+                .build();
+        user.setCarrinho(carrinho);
+
+        repository.save(user);
+    }
+
+    public String login(UserLoginRequest request) {
+        UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken((request.getEmail()), request.getPassword());
+        var auth = this.authenticationManager.authenticate(usernamePassword);
+
+        return tokenService.generateToken((Usuario) auth.getPrincipal());
+    }
+}

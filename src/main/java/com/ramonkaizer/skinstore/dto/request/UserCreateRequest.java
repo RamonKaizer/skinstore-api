@@ -3,16 +3,10 @@ package com.ramonkaizer.skinstore.dto.request;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class UserRequest {
+@Getter
+public class UserCreateRequest {
 
     @NotBlank(message = "Name is required")
     private String nome;
@@ -23,5 +17,4 @@ public class UserRequest {
 
     @Size(min = 8, message = "Password must be at least 8 characters")
     private String password;
-
 }

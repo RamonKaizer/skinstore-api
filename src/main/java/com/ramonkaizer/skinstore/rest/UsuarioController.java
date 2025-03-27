@@ -1,26 +1,29 @@
 package com.ramonkaizer.skinstore.rest;
 
-import com.ramonkaizer.skinstore.dto.request.UserRequest;
-import com.ramonkaizer.skinstore.service.usuario.UsuarioService;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ramonkaizer.skinstore.dto.request.UserCreateRequest;
+import com.ramonkaizer.skinstore.dto.request.UserLoginRequest;
+import com.ramonkaizer.skinstore.service.UsuarioService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping()
+@AllArgsConstructor
 public class UsuarioController {
 
-    @Autowired
-    private UsuarioService service;
+    private final UsuarioService service;
 
     @PostMapping("/register")
-    public ResponseEntity<Void> createUser(@RequestBody UserRequest userRequest) {
-        service.saveUser(userRequest);
+    public ResponseEntity<Void> createUser(@RequestBody UserCreateRequest request) {
+        service.saveUser(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<String> login(@RequestBody UserLoginRequest request) {
+        String token = service.login(request);
+        return ResponseEntity.status(HttpStatus.OK).body(token);
     }
 }

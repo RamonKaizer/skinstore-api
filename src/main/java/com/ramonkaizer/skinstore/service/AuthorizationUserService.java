@@ -1,4 +1,4 @@
-package com.ramonkaizer.skinstore.service.usuario;
+package com.ramonkaizer.skinstore.service;
 
 import com.ramonkaizer.skinstore.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;

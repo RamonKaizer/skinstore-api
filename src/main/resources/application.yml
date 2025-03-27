@@ -9,7 +9,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
@@ -28,7 +28,7 @@ spring:
             enable: true
 
 jwt:
-  secret: minha-chave-secreta-super-segura
+  secret: minhachavesegura
   expiration: 3600000
 
 logging:

@@ -38,4 +38,11 @@ public class Skin {
 
     @Enumerated(EnumType.STRING)
     private StatusSkin status;
+
+    private boolean ofertaSemana;
+
+    @PrePersist()
+    void prePersist() {
+        this.status = StatusSkin.DISPONIVEL;
+    }
 }
