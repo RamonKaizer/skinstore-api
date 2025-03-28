@@ -1,14 +1,17 @@
 package com.ramonkaizer.skinstore.repository;
 
 import com.ramonkaizer.skinstore.domain.Skin;
-import com.ramonkaizer.skinstore.enums.StatusSkin;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface SkinRepository extends JpaRepository<Skin, Long> {
+public interface SkinRepository extends JpaRepository<Skin, Long>, JpaSpecificationExecutor<Skin> {
 
-    List<Skin> findByStatus(StatusSkin status);
+    @Query("SELECT s FROM Skin s WHERE s.ofertaSemana = true AND s.status = 'DISPONIVEL' ")
+    List<Skin> ofertaSemana();
+
 }

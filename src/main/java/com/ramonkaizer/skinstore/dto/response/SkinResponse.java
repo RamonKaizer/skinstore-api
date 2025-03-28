@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class SkinResponse {
 
+    private Long id;
     private String nome;
     private Double preco;
     private String imagem;

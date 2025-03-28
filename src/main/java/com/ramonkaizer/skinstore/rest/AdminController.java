@@ -1,6 +1,6 @@
 package com.ramonkaizer.skinstore.rest;
 
-import com.ramonkaizer.skinstore.dto.request.SkinRequest;
+import com.ramonkaizer.skinstore.dto.request.SkinSaveRequest;
 import com.ramonkaizer.skinstore.service.SkinService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ public class AdminController {
     private final SkinService skinService;
 
     @PostMapping("/inserir-skin")
-    public ResponseEntity<Void> inserirSkin(@RequestBody SkinRequest request) {
+    public ResponseEntity<Void> inserirSkin(@RequestBody SkinSaveRequest request) {
         skinService.inserirSkin(request);
         return  ResponseEntity.status(HttpStatus.CREATED).build();
     }

@@ -5,7 +5,7 @@ import com.ramonkaizer.skinstore.enums.Raridade;
 import lombok.Getter;
 
 @Getter
-public class SkinRequest {
+public class SkinSaveRequest {
     private String nome;
     private Double preco;
     private String imagem;
