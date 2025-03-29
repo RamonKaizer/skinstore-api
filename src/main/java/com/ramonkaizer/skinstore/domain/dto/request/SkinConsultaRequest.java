@@ -1,9 +1,9 @@
-package com.ramonkaizer.skinstore.dto.request;
+package com.ramonkaizer.skinstore.domain.dto.request;
 
-import com.ramonkaizer.skinstore.enums.Categoria;
-import com.ramonkaizer.skinstore.enums.Raridade;
-import com.ramonkaizer.skinstore.enums.SortBy;
-import com.ramonkaizer.skinstore.enums.SortDirection;
+import com.ramonkaizer.skinstore.domain.enums.Categoria;
+import com.ramonkaizer.skinstore.domain.enums.Raridade;
+import com.ramonkaizer.skinstore.domain.enums.SortBy;
+import com.ramonkaizer.skinstore.domain.enums.SortDirection;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

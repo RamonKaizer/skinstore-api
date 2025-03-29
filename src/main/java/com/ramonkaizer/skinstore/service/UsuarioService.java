@@ -1,9 +1,9 @@
 package com.ramonkaizer.skinstore.service;
 
-import com.ramonkaizer.skinstore.domain.Carrinho;
-import com.ramonkaizer.skinstore.domain.Usuario;
-import com.ramonkaizer.skinstore.dto.request.UserCreateRequest;
-import com.ramonkaizer.skinstore.dto.request.UserLoginRequest;
+import com.ramonkaizer.skinstore.domain.entity.Carrinho;
+import com.ramonkaizer.skinstore.domain.entity.Usuario;
+import com.ramonkaizer.skinstore.domain.dto.request.UserCreateRequest;
+import com.ramonkaizer.skinstore.domain.dto.request.UserLoginRequest;
 import com.ramonkaizer.skinstore.repository.UsuarioRepository;
 import com.ramonkaizer.skinstore.security.TokenService;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.ramonkaizer.skinstore.domain;
+package com.ramonkaizer.skinstore.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,14 +11,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarrinhoSkin {
+public class PedidoSkin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "carrinho_id")
-    private Carrinho carrinho;
+    @JoinColumn(name = "pedido_id")
+    private Pedido pedido;
 
     @ManyToOne
     @JoinColumn(name = "skin_id")

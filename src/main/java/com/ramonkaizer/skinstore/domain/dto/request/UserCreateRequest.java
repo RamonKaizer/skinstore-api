@@ -1,4 +1,4 @@
-package com.ramonkaizer.skinstore.dto.request;
+package com.ramonkaizer.skinstore.domain.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

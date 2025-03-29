@@ -1,6 +1,6 @@
-package com.ramonkaizer.skinstore.domain;
+package com.ramonkaizer.skinstore.domain.entity;
 
-import com.ramonkaizer.skinstore.enums.UserRole;
+import com.ramonkaizer.skinstore.domain.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

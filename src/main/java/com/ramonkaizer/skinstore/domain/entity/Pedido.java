@@ -1,6 +1,6 @@
-package com.ramonkaizer.skinstore.domain;
+package com.ramonkaizer.skinstore.domain.entity;
 
-import com.ramonkaizer.skinstore.enums.StatusPedido;
+import com.ramonkaizer.skinstore.domain.enums.StatusPedido;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

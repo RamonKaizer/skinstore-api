@@ -1,4 +1,4 @@
-package com.ramonkaizer.skinstore.domain;
+package com.ramonkaizer.skinstore.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

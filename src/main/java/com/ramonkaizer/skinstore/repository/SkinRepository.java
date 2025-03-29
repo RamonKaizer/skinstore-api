@@ -1,6 +1,6 @@
 package com.ramonkaizer.skinstore.repository;
 
-import com.ramonkaizer.skinstore.domain.Skin;
+import com.ramonkaizer.skinstore.domain.entity.Skin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;

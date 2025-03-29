@@ -1,8 +1,10 @@
 package com.ramonkaizer.skinstore.specification;
 
-import com.ramonkaizer.skinstore.domain.Skin;
-import com.ramonkaizer.skinstore.dto.request.SkinConsultaRequest;
-import com.ramonkaizer.skinstore.enums.*;
+import com.ramonkaizer.skinstore.domain.entity.Skin;
+import com.ramonkaizer.skinstore.domain.dto.request.SkinConsultaRequest;
+import com.ramonkaizer.skinstore.domain.enums.SortBy;
+import com.ramonkaizer.skinstore.domain.enums.SortDirection;
+import com.ramonkaizer.skinstore.domain.enums.StatusSkin;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 

@@ -1,9 +1,9 @@
 package com.ramonkaizer.skinstore.service;
 
-import com.ramonkaizer.skinstore.domain.Skin;
-import com.ramonkaizer.skinstore.dto.request.SkinConsultaRequest;
-import com.ramonkaizer.skinstore.dto.request.SkinSaveRequest;
-import com.ramonkaizer.skinstore.dto.response.SkinResponse;
+import com.ramonkaizer.skinstore.domain.entity.Skin;
+import com.ramonkaizer.skinstore.domain.dto.request.SkinConsultaRequest;
+import com.ramonkaizer.skinstore.domain.dto.request.SkinSaveRequest;
+import com.ramonkaizer.skinstore.domain.dto.response.SkinResponse;
 import com.ramonkaizer.skinstore.repository.SkinRepository;
 import com.ramonkaizer.skinstore.specification.SkinSpecification;
 import lombok.AllArgsConstructor;

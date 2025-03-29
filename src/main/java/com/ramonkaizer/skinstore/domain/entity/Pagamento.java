@@ -1,8 +1,8 @@
-package com.ramonkaizer.skinstore.domain;
+package com.ramonkaizer.skinstore.domain.entity;
 
 
-import com.ramonkaizer.skinstore.enums.MetodoPagamento;
-import com.ramonkaizer.skinstore.enums.StatusPagamento;
+import com.ramonkaizer.skinstore.domain.enums.MetodoPagamento;
+import com.ramonkaizer.skinstore.domain.enums.StatusPagamento;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

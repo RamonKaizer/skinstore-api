@@ -1,4 +1,4 @@
-package com.ramonkaizer.skinstore.enums;
+package com.ramonkaizer.skinstore.domain.enums;
 
 public enum SortBy {
     PRECO,

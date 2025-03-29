@@ -1,6 +1,6 @@
 package com.ramonkaizer.skinstore.security;
 
-import com.ramonkaizer.skinstore.domain.Usuario;
+import com.ramonkaizer.skinstore.domain.entity.Usuario;
 import com.ramonkaizer.skinstore.repository.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

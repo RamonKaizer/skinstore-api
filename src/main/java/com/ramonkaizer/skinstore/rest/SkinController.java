@@ -1,7 +1,7 @@
 package com.ramonkaizer.skinstore.rest;
 
-import com.ramonkaizer.skinstore.dto.request.SkinConsultaRequest;
-import com.ramonkaizer.skinstore.dto.response.SkinResponse;
+import com.ramonkaizer.skinstore.domain.dto.request.SkinConsultaRequest;
+import com.ramonkaizer.skinstore.domain.dto.response.SkinResponse;
 import com.ramonkaizer.skinstore.service.SkinService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

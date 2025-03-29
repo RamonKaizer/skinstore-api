@@ -1,8 +1,8 @@
-package com.ramonkaizer.skinstore.domain;
+package com.ramonkaizer.skinstore.domain.entity;
 
-import com.ramonkaizer.skinstore.enums.Categoria;
-import com.ramonkaizer.skinstore.enums.Raridade;
-import com.ramonkaizer.skinstore.enums.StatusSkin;
+import com.ramonkaizer.skinstore.domain.enums.Categoria;
+import com.ramonkaizer.skinstore.domain.enums.Raridade;
+import com.ramonkaizer.skinstore.domain.enums.StatusSkin;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

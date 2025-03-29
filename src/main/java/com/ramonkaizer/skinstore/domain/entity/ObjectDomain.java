@@ -1,4 +1,4 @@
-package com.ramonkaizer.skinstore.domain;
+package com.ramonkaizer.skinstore.domain.entity;
 
 import java.time.LocalDateTime;
 

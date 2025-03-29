@@ -1,25 +1,24 @@
 package com.ramonkaizer.skinstore.rest;
 
-import com.ramonkaizer.skinstore.domain.dto.request.SkinSaveRequest;
-import com.ramonkaizer.skinstore.service.SkinService;
+import com.ramonkaizer.skinstore.service.CarrinhoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/carrinho")
 @AllArgsConstructor
-public class AdminController {
+public class CarrinhoController {
 
-    private final SkinService skinService;
+    private final CarrinhoService service;
 
-    @PostMapping("/inserir-skin")
-    public ResponseEntity<Void> inserirSkin(@RequestBody SkinSaveRequest request) {
-        skinService.inserirSkin(request);
+    @PostMapping("/inserir-skin/{id}")
+    public ResponseEntity<Void> inserirItem(@PathVariable Long skinId) {
+        service.inserirSkin(skinId);
         return  ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

@@ -1,7 +1,7 @@
-package com.ramonkaizer.skinstore.dto.response;
+package com.ramonkaizer.skinstore.domain.dto.response;
 
-import com.ramonkaizer.skinstore.enums.Categoria;
-import com.ramonkaizer.skinstore.enums.Raridade;
+import com.ramonkaizer.skinstore.domain.enums.Categoria;
+import com.ramonkaizer.skinstore.domain.enums.Raridade;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
