@@ -4,13 +4,11 @@ import com.ramonkaizer.skinstore.domain.enums.Categoria;
 import com.ramonkaizer.skinstore.domain.enums.Raridade;
 import com.ramonkaizer.skinstore.domain.enums.StatusSkin;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

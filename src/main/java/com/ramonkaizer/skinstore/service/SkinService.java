@@ -1,9 +1,11 @@
 package com.ramonkaizer.skinstore.service;
 
-import com.ramonkaizer.skinstore.domain.entity.Skin;
 import com.ramonkaizer.skinstore.domain.dto.request.SkinConsultaRequest;
 import com.ramonkaizer.skinstore.domain.dto.request.SkinSaveRequest;
 import com.ramonkaizer.skinstore.domain.dto.response.SkinResponse;
+import com.ramonkaizer.skinstore.domain.entity.Skin;
+import com.ramonkaizer.skinstore.domain.enums.StatusSkin;
+import com.ramonkaizer.skinstore.exception.BusinessException;
 import com.ramonkaizer.skinstore.repository.SkinRepository;
 import com.ramonkaizer.skinstore.specification.SkinSpecification;
 import lombok.AllArgsConstructor;
@@ -11,7 +13,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -19,6 +20,10 @@ public class SkinService {
 
     private final SkinRepository repository;
     private final ModelMapper modelMapper;
+
+    public Skin findById(Long id) {
+        return repository.findByIdAndStatus(id, StatusSkin.DISPONIVEL).orElseThrow(() -> new BusinessException("Skin não cadastrada"));
+    }
 
     public void inserirSkin(SkinSaveRequest request) {
         Skin skin = modelMapper.map(request, Skin.class);
@@ -29,12 +34,6 @@ public class SkinService {
         List<Skin> skins = repository.ofertaSemana();
 
         return skins.stream().map(skin -> modelMapper.map(skin, SkinResponse.class)).toList();
-    }
-
-    public SkinResponse consultaPorId(Long id) {
-        Optional<Skin> skin = repository.findById(id);
-
-        return modelMapper.map(skin, SkinResponse.class);
     }
 
     public List<SkinResponse> consultaSkins(SkinConsultaRequest filtros) {

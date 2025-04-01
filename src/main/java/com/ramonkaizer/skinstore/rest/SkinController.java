@@ -2,8 +2,10 @@ package com.ramonkaizer.skinstore.rest;
 
 import com.ramonkaizer.skinstore.domain.dto.request.SkinConsultaRequest;
 import com.ramonkaizer.skinstore.domain.dto.response.SkinResponse;
+import com.ramonkaizer.skinstore.domain.entity.Skin;
 import com.ramonkaizer.skinstore.service.SkinService;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import java.util.List;
 public class SkinController {
 
     private final SkinService service;
+    private final ModelMapper modelMapper;
 
     @GetMapping()
     public ResponseEntity<List<SkinResponse>> consultaSkins(SkinConsultaRequest request) {
@@ -28,8 +31,8 @@ public class SkinController {
 
     @GetMapping("/{id}")
     public ResponseEntity<SkinResponse> consultaPorId(@PathVariable Long id) {
-        SkinResponse response = service.consultaPorId(id);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        Skin skin = service.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(modelMapper.map(skin, SkinResponse.class));
     }
 
     @GetMapping("/oferta-semana")

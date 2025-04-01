@@ -1,15 +1,13 @@
 package com.ramonkaizer.skinstore.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,6 +20,6 @@ public class Carrinho extends ObjectDomain {
     @JoinColumn(name = "usuario_id", unique = true)
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "carrinho")
+    @OneToMany(mappedBy = "carrinho", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CarrinhoSkin> carrinhoSkins;
 }

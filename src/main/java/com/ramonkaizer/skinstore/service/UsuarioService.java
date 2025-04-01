@@ -10,6 +10,8 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,5 +44,13 @@ public class UsuarioService {
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         return tokenService.generateToken((Usuario) auth.getPrincipal());
+    }
+
+    public Usuario getUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        return repository.findByEmail(email);
     }
 }
