@@ -85,4 +85,8 @@ public class CarrinhoService {
                 .valorTotal(valorTotal)
                 .build();
     }
+
+    public void save(Carrinho carrinho) {
+        repository.save(carrinho);
+    }
 }

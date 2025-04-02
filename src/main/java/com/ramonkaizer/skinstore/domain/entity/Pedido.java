@@ -27,7 +27,15 @@ public class Pedido {
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PedidoSkin> pedidoSkins;
+
+    private Double valorTotal;
+
+    @PrePersist
+    void prePersist() {
+        this.dataCriacao = LocalDateTime.now();
+        this.status = StatusPedido.PENDENTE;
+    }
 
 }
