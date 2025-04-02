@@ -48,7 +48,6 @@ public class UsuarioService {
 
     public Usuario getUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         String email = authentication.getName();
 
         return repository.findByEmail(email);

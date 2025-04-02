@@ -1,8 +1,12 @@
 package com.ramonkaizer.skinstore.service;
 
+import com.ramonkaizer.skinstore.domain.dto.response.PagamentoResponse;
 import com.ramonkaizer.skinstore.domain.dto.response.PedidoResponse;
 import com.ramonkaizer.skinstore.domain.dto.response.SkinResponse;
 import com.ramonkaizer.skinstore.domain.entity.*;
+import com.ramonkaizer.skinstore.domain.enums.StatusPagamento;
+import com.ramonkaizer.skinstore.domain.enums.StatusPedido;
+import com.ramonkaizer.skinstore.exception.BusinessException;
 import com.ramonkaizer.skinstore.repository.PedidoRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -56,13 +60,38 @@ public class PedidoService {
         return buildPedidoResponse(pedido);
     }
 
-
     private PedidoResponse buildPedidoResponse(Pedido pedido) {
         return PedidoResponse.builder()
                 .idPedido(pedido.getId())
                 .status(pedido.getStatus().toString())
                 .valorTotal(pedido.getValorTotal())
                 .skins(pedido.getPedidoSkins().stream().map(pedidoSkin -> modelMapper.map(pedidoSkin.getSkin(), SkinResponse.class)).collect(Collectors.toList()))
+                .build();
+    }
+
+    public Pedido findById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new BusinessException("Pedido não cadastrado"));
+    }
+
+    @Transactional
+    public PagamentoResponse pagarPedido(Long pedidoId) {
+        Usuario usuario = usuarioService.getUser();
+
+        Pedido pedido = findById(pedidoId);
+
+        if (!pedido.getUsuario().getId().equals(usuario.getId())) {
+            throw new BusinessException("Você não tem permissão para pagar este pedido.");
+        }
+
+        if (!pedido.getStatus().equals(StatusPedido.PENDENTE)) {
+             throw new BusinessException("O pedido não está aguardando pagamento.");
+        }
+
+        pedido.setStatus(StatusPedido.FINALIZADO);
+        repository.save(pedido);
+
+        return PagamentoResponse.builder()
+                .statusPagamento(StatusPagamento.APROVADO)
                 .build();
     }
 }
