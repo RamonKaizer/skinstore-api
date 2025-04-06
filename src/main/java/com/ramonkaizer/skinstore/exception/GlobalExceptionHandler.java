@@ -13,5 +13,12 @@ public class GlobalExceptionHandler {
     public String handleBusinessException(BusinessException ex) {
         return ex.getMessage();
     }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handleGenericException(Exception ex) {
+        return "Erro interno: " + ex.getMessage();
+    }
+
 }
 
