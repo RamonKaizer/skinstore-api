@@ -14,6 +14,5 @@ import java.util.List;
 public class CarrinhoResponse {
 
     private List<SkinResponse> skins;
-
     private Double valorTotal;
 }

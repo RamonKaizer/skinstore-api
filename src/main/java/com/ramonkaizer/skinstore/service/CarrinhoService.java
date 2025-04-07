@@ -71,7 +71,7 @@ public class CarrinhoService {
         Carrinho carrinho = usuario.getCarrinho();
         List<CarrinhoSkin> carrinhoSkins = carrinho.getCarrinhoSkins();
 
-        List<SkinResponse> skins =  carrinhoSkins.stream()
+        List<SkinResponse> skins = carrinhoSkins.stream()
                 .map(CarrinhoSkin::getSkin)
                 .map(skin -> modelMapper.map(skin, SkinResponse.class))
                 .toList();

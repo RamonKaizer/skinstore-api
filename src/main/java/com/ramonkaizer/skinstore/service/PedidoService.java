@@ -84,7 +84,7 @@ public class PedidoService {
         }
 
         if (!pedido.getStatus().equals(StatusPedido.PENDENTE)) {
-             throw new BusinessException("O pedido não está aguardando pagamento.");
+            throw new BusinessException("O pedido não está aguardando pagamento.");
         }
 
         pedido.setStatus(StatusPedido.FINALIZADO);

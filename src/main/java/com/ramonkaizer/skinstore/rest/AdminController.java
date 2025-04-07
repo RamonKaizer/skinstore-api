@@ -20,6 +20,6 @@ public class AdminController {
     @PostMapping("/inserir-skin")
     public ResponseEntity<Void> inserirSkin(@RequestBody SkinSaveRequest request) {
         skinService.inserirSkin(request);
-        return  ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
