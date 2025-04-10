@@ -21,7 +21,7 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserLoginRequest request) {
         String token = service.login(request);
         return ResponseEntity.status(HttpStatus.OK).body(token);

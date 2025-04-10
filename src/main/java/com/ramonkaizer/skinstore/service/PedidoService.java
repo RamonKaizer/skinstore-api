@@ -1,5 +1,6 @@
 package com.ramonkaizer.skinstore.service;
 
+import com.ramonkaizer.skinstore.domain.dto.request.PagamentoRequest;
 import com.ramonkaizer.skinstore.domain.dto.response.PagamentoResponse;
 import com.ramonkaizer.skinstore.domain.dto.response.PedidoResponse;
 import com.ramonkaizer.skinstore.domain.dto.response.SkinResponse;
@@ -24,6 +25,8 @@ public class PedidoService {
     private final UsuarioService usuarioService;
     private final CarrinhoService carrinhoService;
     private final ModelMapper modelMapper;
+    private final PagamentoService pagamentoService;
+    private final SkinService skinService;
 
     @Transactional
     public PedidoResponse criaPedido() {
@@ -74,7 +77,7 @@ public class PedidoService {
     }
 
     @Transactional
-    public PagamentoResponse pagarPedido(Long pedidoId) {
+    public PagamentoResponse pagarPedido(Long pedidoId, PagamentoRequest request) {
         Usuario usuario = usuarioService.getUser();
 
         Pedido pedido = findById(pedidoId);
@@ -87,11 +90,45 @@ public class PedidoService {
             throw new BusinessException("O pedido não está aguardando pagamento.");
         }
 
-        pedido.setStatus(StatusPedido.FINALIZADO);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        StatusPagamento status;
+        double chance = Math.random();
+        if (chance <= 0.75) {
+            status = StatusPagamento.APROVADO;
+            pedido.setStatus(StatusPedido.FINALIZADO);
+            skinService.removerSkinsCompradas(pedido.getPedidoSkins());
+            repository.save(pedido);
+        } else {
+            status = StatusPagamento.RECUSADO;
+            pedido.setStatus(StatusPedido.CANCELADO);
+        }
+
+        pagamentoService.criaPagamento(status, pedido);
         repository.save(pedido);
 
         return PagamentoResponse.builder()
-                .statusPagamento(StatusPagamento.APROVADO)
+                .statusPagamento(status)
                 .build();
+    }
+
+    public PedidoResponse getPedidoId(Long pedidoId) {
+        Usuario usuario = usuarioService.getUser();
+        Pedido pedido = findById(pedidoId);
+        if (!pedido.getUsuario().getId().equals(usuario.getId())) {
+            throw new BusinessException("Você não tem permissão para acessar este pedido.");
+        }
+
+        return buildPedidoResponse(pedido);
+    }
+
+    public List<PedidoResponse> getPedidos() {
+        Usuario usuario = usuarioService.getUser();
+        List<Pedido> pedidos = repository.findByUsuario(usuario);
+        return pedidos.stream().map(this::buildPedidoResponse).collect(Collectors.toList());
     }
 }

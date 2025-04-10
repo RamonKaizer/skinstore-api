@@ -20,7 +20,7 @@ public class CarrinhoController {
         return  ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PostMapping("/remover-skin/{id}")
+    @DeleteMapping("/remover-skin/{id}")
     public ResponseEntity<Void> removerSkin(@PathVariable Long id) {
         service.removerSkin(id);
         return  ResponseEntity.status(HttpStatus.CREATED).build();
