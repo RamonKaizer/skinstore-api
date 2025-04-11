@@ -28,7 +28,7 @@ public class Skin {
     @Enumerated(EnumType.STRING)
     private Raridade raridade;
 
-    @Column(length = 15)
+    @Column(length = 100)
     private String floatValue;
 
     @Enumerated(EnumType.STRING)
