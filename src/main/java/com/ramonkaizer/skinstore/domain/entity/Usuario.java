@@ -2,6 +2,7 @@ package com.ramonkaizer.skinstore.domain.entity;
 
 import com.ramonkaizer.skinstore.domain.enums.UserRole;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -20,6 +22,10 @@ public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @Column(unique = true)
+    private UUID uuid;
 
     @Column(length = 250)
     private String nome;
@@ -76,5 +82,6 @@ public class Usuario implements UserDetails {
     @PrePersist
     void prePersist() {
         this.setRole(UserRole.USER);
+        this.setUuid(UUID.randomUUID());
     }
 }

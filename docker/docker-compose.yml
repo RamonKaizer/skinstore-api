@@ -4,7 +4,7 @@ services:
   mysql:
     image: mysql:8.0
     container_name: mysql_skins
-    restart: always
+    restart: no
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: skins_db
@@ -20,7 +20,7 @@ services:
   adminer:
     image: adminer
     container_name: adminer_skins
-    restart: always
+    restart: no
     ports:
       - "8081:8080"
     networks:
